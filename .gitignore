@@ -1,4 +1,6 @@
 # Logs
+secrets.json
+.gitpod.yml
 logs
 *.log
 npm-debug.log*
@@ -128,3 +130,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.vercel
