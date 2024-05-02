@@ -11,7 +11,7 @@ const fetchContract = (signerOrProvider) =>
   new ethers.Contract(MarketAddress, MarketAddressABI, signerOrProvider);
 
 export const NFTProvider = ({ children }) => {
-  const nftCurrency = "Ttaraxa";
+  const nftCurrency = "Ttara";
   const [currentAccount, setCurrentAccount] = useState("");
   const [isLoadingNFT, setIsLoadingNFT] = useState(false);
   const [imageURL, setImageURL] = useState("");
@@ -47,7 +47,7 @@ export const NFTProvider = ({ children }) => {
       setIsLoadingNFT(false);
 
       const provider = new ethers.providers.JsonRpcProvider(
-        `https://canto-testnet.plexnode.wtf`
+        `https://rpc.testnet.taraxa.io`
       );
       const contract = fetchContract(provider);
 

@@ -28,11 +28,11 @@ const Stake = () => {
   const [activeSelect, setActiveSelect] = useState("Recently Added");
   const [balance, setBalance] = useState(0);
 
-  const TCANTO = {
-    name: "TCANTO",
-    chainId: 7701,
+  const Ttaraxa = {
+    name: "Ttara",
+    chainId: 842,
     _defaultProvider: (providers) =>
-      new providers.JsonRpcProvider(`https://canto-testnet.plexnode.wtf`),
+      new providers.JsonRpcProvider(`https://rpc.testnet.taraxa.io`),
   };
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const Stake = () => {
 
   const getUserBalance = async () => {
     try {
-      const provider = ethers.getDefaultProvider(TCANTO);
+      const provider = ethers.getDefaultProvider(Ttaraxa);
       const balance = await provider.getBalance(currentAccount);
       setBalance(ethers.utils.formatEther(balance.toString()));
     } catch (error) {
@@ -146,7 +146,7 @@ const Stake = () => {
             className="text-nft-black-1 dark:text-nft-gray-2 border-nft-gray-1"
           >
             {fixed ? amount?.toFixed(9) : Number.parseFloat(amount).toFixed(3)}{" "}
-            TCANTO
+            Ttaraxa
           </Text>
         </Box>
       </Flex>
