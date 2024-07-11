@@ -1,1 +1,1 @@
-# miniutopia-taraxa
+# miniutopia-taraxa testnet 
