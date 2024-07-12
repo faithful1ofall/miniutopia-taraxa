@@ -15,7 +15,10 @@ const ResellNFT = () => {
   const fetchNFT = async () => {
     if (!tokenURI) return;
 
-    const { data } = await axios.get(tokenURI);
+    const res = await fetch(`/api/fetch?url=${tokenURI}`);
+
+    const data = await res.json();
+
 
     setPrice(data.price);
     setImage(data.image);

@@ -50,16 +50,23 @@ export const NFTProvider = ({ children }) => {
         `https://rpc.testnet.taraxa.io`
       );
       const contract = fetchContract(provider);
+   //   console.log(contract);
 
       const data = await contract.fetchMarketItems();
+
+      console.log(data);
 
       const items = await Promise.all(
         data.map(
           async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+
             const tokenURI = await contract.tokenURI(tokenId.toString());
-            const {
-              data: { image, name, description },
-            } = await axios.get(tokenURI);
+
+           const res = await fetch(`/api/fetch?url=${tokenURI}`);
+
+            const data = await res.json();
+
+
             const price = ethers.utils.formatUnits(
               unformattedPrice.toString(),
               "ether"
@@ -71,9 +78,9 @@ export const NFTProvider = ({ children }) => {
               id: tokenId.toNumber(),
               seller,
               owner,
-              image,
-              name,
-              description,
+              image: data.image,
+              name: data.name,
+              description: data.description,
               tokenURI,
             };
           }
@@ -105,9 +112,11 @@ export const NFTProvider = ({ children }) => {
         data.map(
           async ({ tokenId, seller, owner, price: unformattedPrice }) => {
             const tokenURI = await contract.tokenURI(tokenId.toString());
-            const {
-              data: { image, name, description },
-            } = await axios.get(tokenURI);
+
+            const res = await fetch(`/api/fetch?url=${tokenURI}`);
+
+            const data = await res.json();
+
             const price = ethers.utils.formatUnits(
               unformattedPrice.toString(),
               "ether"
@@ -118,9 +127,9 @@ export const NFTProvider = ({ children }) => {
               tokenId: tokenId.toNumber(),
               seller,
               owner,
-              image,
-              name,
-              description,
+              image: data.image,
+              name: data.name,
+              description: data.description,
               tokenURI,
             };
           }

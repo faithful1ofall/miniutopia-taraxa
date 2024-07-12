@@ -2,9 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    loader: "akamai",
-    path: "",
-    //domains: ["ipfs.infura.io", "miniutopia.infura-ipfs.io"],
+    domains: ["ipfs.io", "miniutopia.infura-ipfs.io", "cloudflare-ipfs.com"],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
