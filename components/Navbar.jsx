@@ -122,6 +122,12 @@ const ButtonGroup = ({ setActive, router }) => {
           router.push("/create-nft");
         }}
       />
+      <Button
+      btnName="Account"
+      btnType="outline"
+      classStyles="mx-2 rounded-lg"
+      handleClick={connectWallet}
+      />
     </div>
   ) : (
     <Button

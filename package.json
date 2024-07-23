@@ -17,6 +17,8 @@
     "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@openzeppelin/contracts": "4.5.0",
     "@sanity/client": "^3.3.3",
+    "@tanstack/react-query": "^5.51.1",
+    "@web3modal/wagmi": "^5.0.6",
     "aws-amplify": "^4.3.31",
     "axios": "0.26.0",
     "dotenv": "^16.0.1",
@@ -38,6 +40,8 @@
     "react-twitter-embed": "^4.0.4",
     "swiper": "^8.3.2",
     "uniqid": "^5.4.0",
+    "viem": "^2.17.4",
+    "wagmi": "^2.10.10",
     "web3modal": "1.9.5",
     "zustand": "^4.0.0"
   },
@@ -62,6 +66,6 @@
     "hardhat": "^2.10.2",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.2",
-    "typescript": "4.7.2"
+    "typescript": "5.0.4"
   }
 }

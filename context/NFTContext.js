@@ -4,6 +4,9 @@ import { ethers } from "ethers";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import { MarketAddress, MarketAddressABI } from "./constants";
+import { getAccount, watchAccount } from 'wagmi/actions';
+import { useConfig } from "wagmi";
+import { useWeb3Modal } from '@web3modal/wagmi/react';
 
 export const NFTContext = React.createContext();
 
@@ -17,6 +20,8 @@ export const NFTProvider = ({ children }) => {
   const [imageURL, setImageURL] = useState("");
   const [game, setGame] = useState("");
   const toast = useToast();
+  const { open } = useWeb3Modal();
+  const config = useConfig();
 
   // Not Authenticated toast
   const handleNewNotification = () => {
@@ -216,28 +221,35 @@ export const NFTProvider = ({ children }) => {
   };
 
   const connectWallet = async () => {
-    if (!window.ethereum) return handleNewNotification();
+    await open();
 
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-
-    setCurrentAccount(accounts[0]);
-    handleConnect();
-    window.location.reload();
+    const account =  getAccount(config);
+    setCurrentAccount(account.address);
+    if (currentAccount) {
+      checkIfWalletIsConnect();
+    }
   };
 
+
   const checkIfWalletIsConnect = async () => {
-    if (!window.ethereum) return handleNewNotification();
 
-    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+    if (!currentAccount) {
+      watchAccount(config, {
+        onChange(data) {
 
-    if (accounts.length) {
-      setCurrentAccount(accounts[0]);
-      handleConnect();
+          if (data) {
+            setCurrentAccount(data.address);
+            handleConnect();
+          } else {
+            handleWrongNetworkNotification();    
+          }
+        },
+      })
+      
     } else {
-      handleNewNotification();
+      handleConnect();
     }
+    
   };
 
   useEffect(() => {
